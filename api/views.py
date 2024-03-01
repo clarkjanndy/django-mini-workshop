@@ -24,7 +24,9 @@ class ProductListCreate(ListCreateAPIView):
        data = request.data
        serializer = ProductSerializer(data=data)
        serializer.is_valid(raise_exception=True)
-       serializer.save()
+       serializer.save(
+           created_by = request.user
+       )
        
        return Response({
             "type": "success",
